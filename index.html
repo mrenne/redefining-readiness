@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redefining Readiness: The AI Imperative</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Setting the default font to Inter, as required by best practices */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Use a very light, clean background */
+            background-color: #fcfcfc;
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9ca3af;
+            border-radius: 10px;
+        }
+        /* Style for the card sections */
+        .page-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .page-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(27, 85, 226, 0.15); /* Subtle blue hover shadow */
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        // Simple JS for Toggling Mobile Menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Simple JS for a custom modal (replacing alert())
+        function showModal(title, message) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = message;
+            document.getElementById('custom-modal').classList.remove('hidden');
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+            document.getElementById('modal-backdrop').classList.add('hidden');
+        }
+
+        // Function to simulate navigation to a new page (by showing a modal)
+        function navigateToPage(pageName) {
+            showModal(
+                `Navigating to "${pageName}"`,
+                `In a multi-page website, this link would take you to the full, dedicated page for ${pageName}. Here you would find in-depth data, research, and policy recommendations.`
+            );
+        }
+    </script>
+
+    <!-- Modal for custom messages (replacing alert/confirm) -->
+    <div id="modal-backdrop" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 z-40 transition-opacity" onclick="closeModal()"></div>
+    <div id="custom-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-xl shadow-2xl p-6 max-w-sm w-full transform transition-all">
+                <h3 id="modal-title" class="text-xl font-bold text-gray-900 mb-4">Message Title</h3>
+                <p id="modal-message" class="text-gray-700 mb-6">Message content goes here.</p>
+                <button onclick="closeModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-150">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Navigation Bar (Slightly enhanced shadow and focus) -->
+    <header class="bg-white shadow-lg sticky top-0 z-30 border-b border-gray-100">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo/Title -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-3xl font-extrabold text-gray-800 tracking-tight">
+                        Redefining <span class="text-blue-700">AI</span> Readiness
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <!-- Links now conceptually lead to separate pages -->
+                    <a href="#journal" class="text-gray-900 hover:text-blue-700 px-3 py-2 rounded-lg text-lg font-semibold transition duration-150">Journal</a>
+                    <button onclick="navigateToPage('Trends & Data')" class="text-gray-900 hover:text-blue-700 px-3 py-2 rounded-lg text-lg font-semibold transition duration-150">Trends & Data</button>
+                    <button onclick="navigateToPage('Pedagogical Shifts')" class="text-gray-900 hover:text-blue-700 px-3 py-2 rounded-lg text-lg font-semibold transition duration-150">Pedagogical Shifts</button>
+                    <a href="#about" class="text-gray-900 hover:text-blue-700 px-3 py-2 rounded-lg text-lg font-semibold transition duration-150">Mission</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="sm:hidden">
+                    <button type="button" onclick="toggleMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition duration-150" aria-controls="mobile-menu" aria-expanded="false">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#journal" onclick="toggleMenu()" class="block text-gray-900 hover:bg-gray-50 hover:text-blue-700 rounded-lg px-3 py-2 text-base font-medium transition duration-150">Journal</a>
+                <button onclick="toggleMenu(); navigateToPage('Trends & Data');" class="block w-full text-left text-gray-900 hover:bg-gray-50 hover:text-blue-700 rounded-lg px-3 py-2 text-base font-medium transition duration-150">Trends & Data</button>
+                <button onclick="toggleMenu(); navigateToPage('Pedagogical Shifts');" class="block w-full text-left text-gray-900 hover:bg-gray-50 hover:text-blue-700 rounded-lg px-3 py-2 text-base font-medium transition duration-150">Pedagogical Shifts</button>
+                <a href="#about" onclick="toggleMenu()" class="block w-full text-left text-gray-900 hover:bg-gray-50 hover:text-blue-700 rounded-lg px-3 py-2 text-base font-medium transition duration-150">Mission</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section (More gradient and impact) -->
+        <div class="relative overflow-hidden pt-16 pb-20 sm:pt-24 sm:pb-28 lg:pt-32 lg:pb-36 bg-gradient-to-br from-white to-blue-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h1 class="text-4xl sm:text-6xl font-extrabold text-gray-900 tracking-tight leading-tight">
+                        Redefining Readiness: The <span class="text-blue-700">AI</span> Imperative
+                    </h1>
+                    <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-600">
+                        A dedicated resource for **Educators**, **Parents**, and **Policy Leaders** on preparing the next generation for an augmented workforce.
+                    </p>
+                    <div class="mt-8 flex justify-center">
+                        <button onclick="showModal('Subscribe Alert', 'Thank you for your interest! This is a mock-up of a high-quality journal site for educators.')" class="bg-blue-600 hover:bg-blue-800 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
+                            Get Latest Insights
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+            <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">
+                Latest Perspectives
+            </h2>
+
+            <!-- Flex container for Journal and Side Pages -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+                <!-- 1. Primary Journal Entry (Single Page Focus) -->
+                <section id="journal" class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-gray-900 mb-6 border-b-2 border-gray-200 pb-3">Journal Entry: The Core Skills Reset</h3>
+
+                    <!-- Journal Card -->
+                    <article class="bg-white rounded-2xl shadow-xl p-6 sm:p-10 transition duration-300 border border-gray-100">
+                        <p class="text-sm font-semibold text-blue-600 uppercase mb-2">October 23, 2025 | Educator Reflection</p>
+                        <h4 class="text-3xl font-extrabold text-gray-900 mb-6">
+                            From Information Recall to Prompt Engineering: What We Must Teach Now
+                        </h4>
+                        <div class="space-y-6 text-lg text-gray-700 leading-relaxed">
+
+                            <p>
+                                For decades, our education system has privileged **information retrieval and procedural knowledge**. We measured success by a student's ability to recall facts or follow a set algorithm. Generative AI fundamentally ends this era. Tools like Gemini and ChatGPT now perform these tasks instantaneously and flawlessly. The challenge, and our new mandate, is shifting focus from *knowing* to **synthesizing, questioning, and applying**. This requires a systemic reset in how we frame career readiness for middle and high school students.
+                            </p>
+                            <p>
+                                While the headlines often focus on job destruction, the deeper reality is augmentation. Our students won't be replaced by AI; they will be replaced by peers who know how to expertly wield AI. This journal entry serves as a high-level call to action. For the specifics on *how* to implement these changes—including concrete data and curriculum proposals—please visit the dedicated sections linked on the right.
+                            </p>
+                            <p class="mt-8 pt-4 border-t border-gray-200 text-gray-800 font-medium">
+                                The future of work is less about specific tools and more about enduring human competencies. Our task as educators is to ensure our students graduate not as competitive recall machines, but as compassionate, critical, and flexible problem-solvers ready to command the machines of tomorrow.
+                            </p>
+                        </div>
+                    </article>
+                </section>
+
+
+                <!-- 2. Separate Pages/Links Section -->
+                <section class="lg:col-span-1 space-y-8 pt-4">
+                    <h3 class="text-2xl font-extrabold text-gray-900 mb-6 border-b-2 border-gray-200 pb-3">Explore Our Sections</h3>
+
+                    <!-- Trends & Data Card -->
+                    <div id="trends" class="page-card bg-white rounded-xl shadow-md p-6 border border-l-4 border-blue-500">
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Trends & Hard Data</h4>
+                        <p class="text-gray-600 mb-4 text-base">
+                            In-depth analysis of recent economic research on AI's impact on job hours, required skills, and salary projections for the next decade.
+                        </p>
+                        <button onclick="navigateToPage('Trends & Data')" class="w-full text-center bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition duration-200 text-sm">
+                            View Data & Research
+                        </button>
+                    </div>
+
+                    <!-- Pedagogical Shifts Card -->
+                    <div id="teachings" class="page-card bg-white rounded-xl shadow-md p-6 border border-l-4 border-green-500">
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Pedagogical Shifts</h4>
+                        <p class="text-gray-600 mb-4 text-base">
+                            Concrete strategies and curriculum proposals for integrating prompt engineering, ethical reasoning, and cognitive flexibility into MS/HS classrooms.
+                        </p>
+                        <button onclick="navigateToPage('Pedagogical Shifts')" class="w-full text-center bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-lg transition duration-200 text-sm">
+                            See Curriculum Ideas
+                        </button>
+                    </div>
+
+                    <!-- About Card -->
+                    <a href="#about" class="page-card block bg-white rounded-xl shadow-md p-6 border border-l-4 border-gray-500">
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Our Mission</h4>
+                        <p class="text-gray-600 text-base">
+                            Understand the purpose of this resource and the educator's perspective driving the content.
+                        </p>
+                    </a>
+                </section>
+            </div>
+        </div>
+
+        <!-- About/Mission Section (Updated styling) -->
+        <section id="about" class="py-16 bg-gray-100 border-t border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Mission: Guiding the Next Generation</h2>
+                <p class="max-w-4xl mx-auto text-xl text-gray-700">
+                    Redefining Readiness: The AI Imperative is dedicated to equipping the adults in a young person's life—teachers, counselors, parents, and elected officials—with the **data-driven insights** and **practical pedagogical strategies** needed to prepare students for the rapidly evolving workforce. We believe informed guidance is the most powerful tool for future success.
+                </p>
+                <div class="mt-8">
+                    <p class="text-lg font-semibold text-gray-800">Authored by: A High School & Middle Educator</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-0">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+                <div class="px-5 py-2"><a href="#journal" class="text-base text-gray-300 hover:text-blue-400 font-medium">Journal</a></div>
+                <div class="px-5 py-2"><button onclick="navigateToPage('Trends & Data')" class="text-base text-gray-300 hover:text-blue-400 font-medium">Trends</button></div>
+                <div class="px-5 py-2"><button onclick="navigateToPage('Pedagogical Shifts')" class="text-base text-gray-300 hover:text-blue-400 font-medium">Teachings</button></div>
+                <div class="px-5 py-2"><button onclick="showModal('Contact Info', 'For collaboration or inquiries, please contact: educator@guidepost.org (mock email)')" class="text-base text-gray-300 hover:text-blue-400 font-medium">Contact</button></div>
+            </nav>
+            <p class="mt-8 text-center text-base text-gray-400">
+                &copy; 2025 Redefining Readiness: The AI Imperative. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

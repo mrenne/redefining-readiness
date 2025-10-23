@@ -44,7 +44,13 @@
         // Simple JS for a custom modal (replacing alert())
         function showModal(title, message) {
             document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-message').innerText = message;
+            document.getElementById('modal-message').innerHTML = message; // Changed to innerHTML
+            
+            // Adjust modal width for simple alerts
+            const modalInner = document.querySelector('#custom-modal > div > div');
+            modalInner.classList.remove('max-w-3xl');
+            modalInner.classList.add('max-w-sm');
+
             document.getElementById('custom-modal').classList.remove('hidden');
             document.getElementById('modal-backdrop').classList.remove('hidden');
         }
@@ -52,24 +58,132 @@
         function closeModal() {
             document.getElementById('custom-modal').classList.add('hidden');
             document.getElementById('modal-backdrop').classList.add('hidden');
+            // Clean up content on close
+            document.getElementById('modal-message').innerHTML = 'Message content goes here.';
         }
 
         // Function to simulate navigation to a new page (by showing a modal)
         function navigateToPage(pageName) {
-            showModal(
-                `Navigating to "${pageName}"`,
-                `In a multi-page website, this link would take you to the full, dedicated page for ${pageName}. Here you would find in-depth data, research, and policy recommendations.`
-            );
+            let title = `Navigating to "${pageName}"`;
+            let content = '';
+
+            // Adjust modal width for content pages
+            const modalInner = document.querySelector('#custom-modal > div > div');
+            modalInner.classList.remove('max-w-sm');
+            modalInner.classList.add('max-w-3xl');
+            
+            if (pageName === 'Trends & Data') {
+                title = 'Trends & Hard Data: The Velocity of Change';
+                content = document.getElementById('trends-data-content').innerHTML; // Inject the rich HTML
+            } else if (pageName === 'Pedagogical Shifts') {
+                title = 'Curriculum Ideas: The 3 C\'s of AI Readiness';
+                content = document.getElementById('pedagogical-shifts-content').innerHTML; // Inject the rich HTML
+            } else {
+                content = `Generic content for ${pageName}.`;
+            }
+
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerHTML = content;
+            document.getElementById('custom-modal').classList.remove('hidden');
+            document.getElementById('modal-backdrop').classList.remove('hidden');
         }
     </script>
+
+    <!-- HIDDEN CONTENT: Trends & Data Page (NEWLY ADDED) -->
+    <div id="trends-data-content" class="hidden">
+        <div class="space-y-8 text-lg text-gray-700 leading-relaxed">
+            <h4 class="text-2xl font-bold text-blue-700 mb-6 border-b pb-2">The Velocity of Change: Data on AI's Impact on the 2035 Workforce</h4>
+            
+            <p>Analyzing economic reports from institutions like the World Economic Forum and McKinsey reveals a clear, rapid trajectory for the future of work. The primary lesson for educators is simple: **the speed of skill obsolescence is the single biggest threat** to our students' career readiness, demanding immediate shifts in curriculum focus.</p>
+
+            <!-- Data Point 1: Augmentation vs. Destruction -->
+            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-500">
+                <h5 class="text-xl font-extrabold text-gray-900 mb-2">Augmentation, Not Destruction</h5>
+                <p>Contrary to fear-mongering headlines, projections show that only a small percentage of jobs will be fully automated. However, **70-85% of all roles will be fundamentally augmented** by AI tools, requiring workers to spend significantly more time on non-routine, human-centric tasks. For example, a paralegal may spend 80% less time drafting documents but 200% more time on client strategy and ethical review.</p>
+            </div>
+
+            <!-- Data Point 2: Rapid Skill Depreciation -->
+            <div class="bg-red-50 p-6 rounded-xl border-l-4 border-red-500">
+                <h5 class="text-xl font-extrabold text-gray-900 mb-2">The Skills Losing Value Fastest</h5>
+                <p>Skills related to **routine cognitive tasks** are depreciating at an accelerating rate. These include:</p>
+                <ul class="list-disc list-inside mt-3 space-y-2 ml-4">
+                    <li>Basic data entry, transcription, and translation.</li>
+                    <li>First-draft report writing and summary generation.</li>
+                    <li>Rule-based customer service and low-complexity code generation.</li>
+                </ul>
+                <p class="text-sm italic mt-4 text-red-700">If a skill can be standardized and executed on a desktop computer, its market value is rapidly approaching zero.</p>
+            </div>
+
+            <!-- Data Point 3: The Premium on Human Skills -->
+            <div class="bg-green-50 p-6 rounded-xl border-l-4 border-green-500">
+                <h5 class="text-xl font-extrabold text-gray-900 mb-2">The Skills Gaining Maximum Value</h5>
+                <p>The premium is shifting to skills that rely on complex human interaction and judgment. Curriculum must emphasize:</p>
+                <ul class="list-disc list-inside mt-3 space-y-2 ml-4">
+                    <li>**Systems Thinking:** Understanding how disparate parts (people, policy, technology) interact to solve complex problems.</li>
+                    <li>**Ethical Judgment & Bias Detection:** The ability to audit AI output for fairness, bias, and adherence to human values.</li>
+                    <li>**Emotional & Cultural Intelligence:** High-stakes negotiation, team leadership, and complex communication that requires nuanced understanding.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- END HIDDEN CONTENT: Trends & Data Page -->
+
+
+    <!-- HIDDEN CONTENT: Pedagogical Shifts Page (Curriculum Ideas) -->
+    <div id="pedagogical-shifts-content" class="hidden">
+        <div class="space-y-8 text-lg text-gray-700 leading-relaxed">
+            <h4 class="text-2xl font-bold text-blue-700 mb-6 border-b pb-2">Rethinking the Classroom: Core Pedagogical Shifts for the AI Era</h4>
+            
+            <p>The imperative for career readiness is no longer about *what* students know, but *how they think* and *how they interact* with powerful generative tools. We propose focusing our curriculum efforts around three core competencies—The 3 C's—to create truly AI-ready graduates.</p>
+
+            <!-- Skill 1: Critical Questioning -->
+            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-500">
+                <h5 class="text-xl font-extrabold text-gray-900 mb-2">1. Critical Questioning (Prompt Engineering)</h5>
+                <p>We must shift from teaching **information retrieval** to teaching **prompt design**. AI output is only as good as the input. Curriculum should emphasize:</p>
+                <ul class="list-disc list-inside mt-3 space-y-2 ml-4">
+                    <li>**Contextualizing:** Providing necessary roles, formats, and constraints to the AI.</li>
+                    <li>**Iterative Refinement:** Teaching students to critique initial AI drafts and ask follow-up questions to push the output further.</li>
+                    <li>**Source Verification:** Requiring manual cross-referencing and grounding AI claims, especially in history and science.</li>
+                </ul>
+            </div>
+
+            <!-- Skill 2: Cognitive Flexibility -->
+            <div class="bg-green-50 p-6 rounded-xl border-l-4 border-green-500">
+                <h5 class="text-xl font-extrabold text-gray-900 mb-2">2. Cognitive Flexibility (Interdisciplinary Synthesis)</h5>
+                <p>The most valuable work AI cannot yet perform is synthesizing disparate concepts. Our assignments must be interdisciplinary by design:</p>
+                <ul class="list-disc list-inside mt-3 space-y-2 ml-4">
+                    <li>**"The Policy Hackathon":** Use geometry, economics, and ethics to design a solar power grid for a fictional city.</li>
+                    <li>**Connecting Domains:** Require students to explicitly link concepts—e.g., analyze a historical treaty (History) through the lens of game theory (Math).</li>
+                    <li>**Embracing Ambiguity:** Present problems with no single correct answer, forcing students to justify their human-driven creative choices.</li>
+                </ul>
+            </div>
+
+            <!-- Skill 3: Creative Command -->
+            <div class="bg-gray-100 p-6 rounded-xl border-l-4 border-gray-500">
+                <h5 class="text-xl font-extrabold text-gray-900 mb-2">3. Creative Command (Human Oversight)</h5>
+                <p>The student is the creative director. AI is merely the intern. We emphasize **authenticity and voice**:</p>
+                <ul class="list-disc list-inside mt-3 space-y-2 ml-4">
+                    <li>**Editing, Not Writing:** Grade students primarily on how they refine, edit, and add human voice to AI-generated drafts.</li>
+                    <li>**Ethical AI Use:** Dedicated lessons on digital citizenship, intellectual property, and recognizing the biases inherent in AI models.</li>
+                    <li>**Show Your Work:** Require students to submit their full prompt chain and a reflective essay on *why* they chose to keep or discard parts of the AI's output.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- END HIDDEN CONTENT: Pedagogical Shifts Page -->
+
 
     <!-- Modal for custom messages (replacing alert/confirm) -->
     <div id="modal-backdrop" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 z-40 transition-opacity" onclick="closeModal()"></div>
     <div id="custom-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-xl shadow-2xl p-6 max-w-sm w-full transform transition-all">
+            <!-- Modal inner container. Width will be set by JS dynamically. -->
+            <div class="bg-white rounded-xl shadow-2xl p-6 w-full transform transition-all max-w-sm">
                 <h3 id="modal-title" class="text-xl font-bold text-gray-900 mb-4">Message Title</h3>
-                <p id="modal-message" class="text-gray-700 mb-6">Message content goes here.</p>
+                <!-- Content area. Height adjusted to allow scroll for long pages -->
+                <div id="modal-message" class="text-gray-700 mb-6 overflow-y-auto" style="max-height: 70vh;">
+                    Message content goes here.
+                </div>
                 <button onclick="closeModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-150">
                     Close
                 </button>
@@ -132,7 +246,7 @@
                         A dedicated resource for **Educators**, **Parents**, and **Policy Leaders** on preparing the next generation for an augmented workforce.
                     </p>
                     <div class="mt-8 flex justify-center">
-                        <button onclick="showModal('Subscribe Alert', 'Thank you for your interest! This is a mock-up of a high-quality journal site for educators.')" class="bg-blue-600 hover:bg-blue-800 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
+                        <button onclick="showModal('Subscribe Alert', '<p class=&quot;text-base&quot;>Thank you for your interest! This is a mock-up of a high-quality journal site for educators.</p>')" class="bg-blue-600 hover:bg-blue-800 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
                             Get Latest Insights
                         </button>
                     </div>
@@ -233,7 +347,7 @@
                 <div class="px-5 py-2"><a href="#journal" class="text-base text-gray-300 hover:text-blue-400 font-medium">Journal</a></div>
                 <div class="px-5 py-2"><button onclick="navigateToPage('Trends & Data')" class="text-base text-gray-300 hover:text-blue-400 font-medium">Trends</button></div>
                 <div class="px-5 py-2"><button onclick="navigateToPage('Pedagogical Shifts')" class="text-base text-gray-300 hover:text-blue-400 font-medium">Teachings</button></div>
-                <div class="px-5 py-2"><button onclick="showModal('Contact Info', 'For collaboration or inquiries, please contact: educator@guidepost.org (mock email)')" class="text-base text-gray-300 hover:text-blue-400 font-medium">Contact</button></div>
+                <div class="px-5 py-2"><button onclick="showModal('Contact Info', '<p class=&quot;text-base&quot;>For collaboration or inquiries, please contact: educator@guidepost.org (mock email)</p>')" class="text-base text-gray-300 hover:text-blue-400 font-medium">Contact</button></div>
             </nav>
             <p class="mt-8 text-center text-base text-gray-400">
                 &copy; 2025 Redefining Readiness: The AI Imperative. All rights reserved.
